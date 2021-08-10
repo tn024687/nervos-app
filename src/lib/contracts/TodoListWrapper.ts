@@ -23,12 +23,11 @@ export class TodoListWrapper {
 
     async getTaskCount(fromAddress: string) {
         const data = await this.contract.methods.taskCount().call({ from: fromAddress });
-
         return parseInt(data, 10);
     }
 
     async getTaskList(taskCount: number, fromAddress: string) {
-        const taskList=[]
+        const taskList = []
         for (let i = 1; i <= taskCount; i++) {
             const task = await this.contract.methods.tasks(i).call({
                 gas: 6000000,
@@ -47,7 +46,6 @@ export class TodoListWrapper {
             ...DEFAULT_SEND_OPTIONS,
             from: fromAddress
         });
-
         return tx;
     }
 
