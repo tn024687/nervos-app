@@ -99,7 +99,8 @@ export function App() {
             setDeployTxHash(undefined);
             setTransactionInProgress(true);
 
-            await _contract.deploy(account);
+            const transactionHash = await _contract.deploy(account);
+            setDeployTxHash(transactionHash);
 
             setExistingContractAddress(_contract.address);
             toast(

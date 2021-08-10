@@ -58,7 +58,7 @@ export class TodoListWrapper {
     }
 
     async deploy(fromAddress: string) {
-        const contract = await (this.contract
+        const deployTx = await (this.contract
             .deploy({
                 data: TodoListJSON.bytecode,
                 arguments: []
@@ -69,7 +69,9 @@ export class TodoListWrapper {
                 to: '0x0000000000000000000000000000000000000000'
             } as any) as any);
 
-        this.useDeployed(contract.contractAddress);
+        this.useDeployed(deployTx.contractAddress);
+
+        return deployTx.transactionHash;
     }
 
     useDeployed(contractAddress: string) {
